@@ -1,0 +1,33 @@
+services:
+  app:
+    build: .
+    container_name: task1-app
+    ports:
+        - "6080:6080" # noVNC web interface
+        - "5900:5900" # VNC server
+        - "8080:8080" # Application port
+    environment:
+      DB_URL: jdbc:mysql://db:3306/telemetry_data
+      DB_USERNAME: raceup
+      DB_PASSWORD: raceup
+      DISPLAY: :99
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: task1-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: telemetry_data
+      MYSQL_USER: raceup
+      MYSQL_PASSWORD: raceup
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/main/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+    db_data:
