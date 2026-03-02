@@ -16,6 +16,6 @@ It uses a database to store the data sent by the client, and it provides a basic
 3. (Optional) Start a client in another terminal or in your IDE and send some data
 
 ## Choices
-- I used MySQL as the database because I am familiar with it
+- I used MySQL for the database because I am familiar with it
 - I first used JavaFX for the GUI, but I had some issues with the Docker image, so I switched to Swing
 - The GUI is posted on a noVNC server because from macos there are some issues with the X11 forwarding
